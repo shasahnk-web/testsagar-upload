@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Sagar Upload Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <img class="logo" src="https://test-sagar-jet.vercel.app/logo.png" alt="Test Sagar" />
+    <div class="badge"><span class="dot"></span> Admin Panel</div>
+    <h1>Test Sagar Upload Panel</h1>
+    <p>Import quiz questions from JS files directly into your Supabase database.<br>All questions are saved as <strong>MCQ</strong> type.</p>
+  </header>
+
+  <!-- ── STEPS ── -->
+  <div class="steps-bar">
+    <div class="step active">
+      <div class="step-num">1</div>
+      <span>Upload File</span>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <span>Select Test</span>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <span>Import</span>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: FILE ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:rgba(99,179,237,.12)">📂</div>
+      <div>
+        <div class="card-title">Step 1 — Upload your JS file</div>
+        <div class="card-sub">Drop a file or paste its contents below</div>
+      </div>
+    </div>
+
+    <div id="drop-zone" class="drop-zone">
+      <div class="drop-icon-wrap">⬆</div>
+      <div class="drop-title">Drop your .js file here</div>
+      <div class="drop-hint">or <span>click to browse</span> · .js / .ts / .txt</div>
+      <input id="file-input" type="file" accept=".js,.ts,.txt" hidden />
+    </div>
+
+    <div class="or-divider"><span>or paste content</span></div>
+
+    <textarea id="paste-area" placeholder="Paste your JS file content here… must contain rawIds and correctAnswers arrays"></textarea>
+  </div>
+
+  <!-- ── ERROR ── -->
+  <div id="error-box" class="alert-box alert-error" hidden>
+    <span>✕</span>
+    <div>
+      <strong>Parse Error</strong>
+      <div id="error-msg"></div>
+    </div>
+  </div>
+
+  <!-- ── STATS ── -->
+  <div id="stats-box" class="alert-box alert-success" hidden>
+    <span>✓</span>
+    <div>
+      <strong id="stats-count"></strong>
+      <div id="stats-badges" class="badge-row"></div>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: TEST ── -->
+  <div id="step2" class="card" hidden>
+    <div class="card-head">
+      <div class="card-icon" style="background:rgba(159,122,234,.12)">🗂</div>
+      <div>
+        <div class="card-title">Step 2 — Select or create a test</div>
+        <div class="card-sub">Questions will be linked to this test</div>
+      </div>
+    </div>
+
+    <!-- Existing test row -->
+    <div id="test-select-row" class="select-row">
+      <select id="test-select">
+        <option value="">— Select a test —</option>
+      </select>
+      <button id="new-test-btn" class="btn btn-outline">+ New Test</button>
+    </div>
+
+    <!-- New test form -->
+    <div id="new-test-form" class="new-test-form" hidden>
+      <div class="form-label-row">✦ Create New Test</div>
+      <div class="form-grid">
+        <div class="fg full">
+          <label>Test Name</label>
+          <input id="new-name" type="text" placeholder="e.g. JEE Main 2025 Paper 1" />
+        </div>
+        <div class="fg">
+          <label>Stream</label>
+          <select id="new-stream"></select>
+        </div>
+        <div class="fg">
+          <label>Category</label>
+          <input id="new-category" type="text" value="All Tests" />
+        </div>
+        <div class="fg">
+          <label>Duration (mins)</label>
+          <input id="new-duration" type="number" value="180" />
+        </div>
+        <div class="fg">
+          <label>Total Questions</label>
+          <input id="new-total" type="number" value="75" />
+        </div>
+        <div class="fg full">
+          <label>Description (optional)</label>
+          <input id="new-desc" type="text" placeholder="Brief description…" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button id="create-test-btn" class="btn btn-primary">Create Test</button>
+        <button id="cancel-new-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div id="progress-wrap" hidden>
+      <div id="prog-label" class="prog-label">Uploading…</div>
+      <div class="prog-track"><div id="prog-bar" class="prog-fill" style="width:0%"></div></div>
+    </div>
+
+    <!-- Upload button -->
+    <button id="upload-btn" class="btn btn-success btn-block" disabled>
+      Upload Questions
+    </button>
+  </div>
+
+  <footer class="footer">
+    <strong>Test Sagar Upload Panel</strong> · All questions saved as MCQ · Powered by Supabase
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
