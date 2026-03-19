@@ -4,153 +4,205 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Test Sagar Upload Panel</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 
-<div class="wrapper">
-
-  <!-- ── HEADER ── -->
   <header class="header">
-    <img class="logo" src="https://test-sagar-jet.vercel.app/logo.png" alt="Test Sagar" />
-    <div class="badge"><span class="dot"></span> Admin Panel</div>
-    <h1>Test Sagar Upload Panel</h1>
-    <p>Import quiz questions from JS files directly into your Supabase database.<br>All questions are saved as <strong>MCQ</strong> type.</p>
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <img src="https://test-sagar-jet.vercel.app/logo.png" alt="Test Sagar Logo" class="logo" />
+        <div class="logo-text">
+          <span class="logo-title">Test Sagar</span>
+          <span class="logo-sub">Upload Panel</span>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="pulse-dot"></span>
+        Admin Portal
+      </div>
+    </div>
   </header>
 
-  <!-- ── STEPS ── -->
-  <div class="steps-bar">
-    <div class="step active">
-      <div class="step-num">1</div>
-      <span>Upload File</span>
-    </div>
-    <div class="step-connector"></div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <span>Select Test</span>
-    </div>
-    <div class="step-connector"></div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <span>Import</span>
-    </div>
-  </div>
-
-  <!-- ── STEP 1: FILE ── -->
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:rgba(99,179,237,.12)">📂</div>
-      <div>
-        <div class="card-title">Step 1 — Upload your JS file</div>
-        <div class="card-sub">Drop a file or paste its contents below</div>
+  <main class="main">
+    <div class="hero">
+      <div class="hero-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       </div>
+      <h1 class="hero-title">Upload Quiz File</h1>
+      <p class="hero-desc">Parse a JS question file and push it live to the Supabase database instantly.</p>
     </div>
 
-    <div id="drop-zone" class="drop-zone">
-      <div class="drop-icon-wrap">⬆</div>
-      <div class="drop-title">Drop your .js file here</div>
-      <div class="drop-hint">or <span>click to browse</span> · .js / .ts / .txt</div>
-      <input id="file-input" type="file" accept=".js,.ts,.txt" hidden />
+    <div class="card-grid">
+      <!-- Step 1: Test Details -->
+      <section class="card step-card" id="step1">
+        <div class="step-badge">Step 1</div>
+        <h2 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+          Test Details
+        </h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="testName">Test Name <span class="req">*</span></label>
+            <input type="text" id="testName" placeholder="e.g. AITS-1 JEE Advanced" class="input" />
+          </div>
+          <div class="form-group">
+            <label for="testStream">Stream <span class="req">*</span></label>
+            <select id="testStream" class="input">
+              <option value="">Select Stream</option>
+              <option value="10th Grade">10th Grade</option>
+              <option value="11th JEE">11th JEE</option>
+              <option value="11th NEET">11th NEET</option>
+              <option value="12th JEE">12th JEE</option>
+              <option value="12th JEE HINDI">12th JEE HINDI</option>
+              <option value="12th NEET">12th NEET</option>
+              <option value="12th NEET HINDI">12th NEET HINDI</option>
+              <option value="9th Grade">9th Grade</option>
+              <option value="CA">CA</option>
+              <option value="CUET">CUET</option>
+              <option value="Dropper JEE">Dropper JEE</option>
+              <option value="Dropper NEET">Dropper NEET</option>
+              <option value="Dropper NEET HINDI">Dropper NEET HINDI</option>
+              <option value="GATE">GATE</option>
+              <option value="GATE CS">GATE CS</option>
+              <option value="GATE ECE">GATE ECE</option>
+              <option value="GATE EE">GATE EE</option>
+              <option value="GATE ME">GATE ME</option>
+              <option value="NDA">NDA</option>
+              <option value="SSC">SSC</option>
+              <option value="UPSC">UPSC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="testCategory">Category</label>
+            <select id="testCategory" class="input">
+              <option value="All Tests">All Tests</option>
+              <option value="AITS">AITS</option>
+              <option value="Practice Tests">Practice Tests</option>
+              <option value="Mock Tests">Mock Tests</option>
+              <option value="Chapter Tests">Chapter Tests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="testDuration">Duration (minutes)</label>
+            <input type="number" id="testDuration" value="180" min="1" class="input" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="testDescription">Description</label>
+          <textarea id="testDescription" class="input textarea" placeholder="Optional description..."></textarea>
+        </div>
+      </section>
+
+      <!-- Step 2: Upload File -->
+      <section class="card step-card" id="step2">
+        <div class="step-badge">Step 2</div>
+        <h2 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Upload JS File
+        </h2>
+
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-inner">
+            <div class="drop-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <p class="drop-title">Drop your JS file here</p>
+            <p class="drop-sub">or <label for="fileInput" class="file-btn">browse file</label></p>
+            <p class="drop-note">.js files only — AITS / Practice Test format</p>
+          </div>
+          <input type="file" id="fileInput" accept=".js" class="hidden" />
+        </div>
+
+        <div id="fileInfo" class="file-info hidden">
+          <div class="file-info-inner">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span id="fileName">file.js</span>
+            <button class="remove-btn" id="removeFile" title="Remove file">×</button>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <div class="or-divider"><span>or paste content</span></div>
-
-    <textarea id="paste-area" placeholder="Paste your JS file content here… must contain rawIds and correctAnswers arrays"></textarea>
-  </div>
-
-  <!-- ── ERROR ── -->
-  <div id="error-box" class="alert-box alert-error" hidden>
-    <span>✕</span>
-    <div>
-      <strong>Parse Error</strong>
-      <div id="error-msg"></div>
-    </div>
-  </div>
-
-  <!-- ── STATS ── -->
-  <div id="stats-box" class="alert-box alert-success" hidden>
-    <span>✓</span>
-    <div>
-      <strong id="stats-count"></strong>
-      <div id="stats-badges" class="badge-row"></div>
-    </div>
-  </div>
-
-  <!-- ── STEP 2: TEST ── -->
-  <div id="step2" class="card" hidden>
-    <div class="card-head">
-      <div class="card-icon" style="background:rgba(159,122,234,.12)">🗂</div>
-      <div>
-        <div class="card-title">Step 2 — Select or create a test</div>
-        <div class="card-sub">Questions will be linked to this test</div>
+    <!-- Preview Section -->
+    <section class="card preview-card hidden" id="previewSection">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Parsed Preview
+      </h2>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="table-wrap">
+        <table class="preview-table" id="previewTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Question ID</th>
+              <th>Subject</th>
+              <th>Type</th>
+              <th>Correct Answer</th>
+              <th>Image URL</th>
+            </tr>
+          </thead>
+          <tbody id="previewBody"></tbody>
+        </table>
       </div>
+      <p class="table-note" id="tableNote"></p>
+    </section>
+
+    <!-- Upload Button -->
+    <div class="action-row">
+      <button class="btn-upload" id="uploadBtn" disabled>
+        <span class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span id="uploadBtnText">Upload to Database</span>
+      </button>
     </div>
 
-    <!-- Existing test row -->
-    <div id="test-select-row" class="select-row">
-      <select id="test-select">
-        <option value="">— Select a test —</option>
-      </select>
-      <button id="new-test-btn" class="btn btn-outline">+ New Test</button>
-    </div>
-
-    <!-- New test form -->
-    <div id="new-test-form" class="new-test-form" hidden>
-      <div class="form-label-row">✦ Create New Test</div>
-      <div class="form-grid">
-        <div class="fg full">
-          <label>Test Name</label>
-          <input id="new-name" type="text" placeholder="e.g. JEE Main 2025 Paper 1" />
-        </div>
-        <div class="fg">
-          <label>Stream</label>
-          <select id="new-stream"></select>
-        </div>
-        <div class="fg">
-          <label>Category</label>
-          <input id="new-category" type="text" value="All Tests" />
-        </div>
-        <div class="fg">
-          <label>Duration (mins)</label>
-          <input id="new-duration" type="number" value="180" />
-        </div>
-        <div class="fg">
-          <label>Total Questions</label>
-          <input id="new-total" type="number" value="75" />
-        </div>
-        <div class="fg full">
-          <label>Description (optional)</label>
-          <input id="new-desc" type="text" placeholder="Brief description…" />
+    <!-- Log / Status -->
+    <section class="card log-card hidden" id="logSection">
+      <div class="log-header">
+        <h2 class="card-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Upload Progress
+        </h2>
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width:0%"></div>
+          </div>
+          <span class="progress-pct" id="progressPct">0%</span>
         </div>
       </div>
-      <div class="form-actions">
-        <button id="create-test-btn" class="btn btn-primary">Create Test</button>
-        <button id="cancel-new-btn" class="btn btn-ghost">Cancel</button>
+      <div class="log-body" id="logBody"></div>
+    </section>
+
+    <!-- Success -->
+    <section class="card success-card hidden" id="successSection">
+      <div class="success-inner">
+        <div class="success-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 class="success-title">Upload Complete!</h2>
+        <p class="success-msg" id="successMsg">All questions uploaded successfully.</p>
+        <button class="btn-reset" id="resetBtn">Upload Another</button>
       </div>
-    </div>
-
-    <!-- Progress -->
-    <div id="progress-wrap" hidden>
-      <div id="prog-label" class="prog-label">Uploading…</div>
-      <div class="prog-track"><div id="prog-bar" class="prog-fill" style="width:0%"></div></div>
-    </div>
-
-    <!-- Upload button -->
-    <button id="upload-btn" class="btn btn-success btn-block" disabled>
-      Upload Questions
-    </button>
-  </div>
+    </section>
+  </main>
 
   <footer class="footer">
-    <strong>Test Sagar Upload Panel</strong> · All questions saved as MCQ · Powered by Supabase
+    <span>Test Sagar Upload Panel &copy; 2024</span>
+    <span class="footer-dot">·</span>
+    <span>Powered by Supabase</span>
   </footer>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
